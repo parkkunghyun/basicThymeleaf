@@ -66,12 +66,51 @@ public class BasicController {
         return "basic/link";
     }
 
+    @GetMapping("/literal")
+    public String literal(Model model) {
+        model.addAttribute("data","hello spring");
+        return "basic/literal";
+    }
+
+    @GetMapping("/operation")
+    public String operation(Model model){
+        model.addAttribute("nullData", null);
+        model.addAttribute("data","Spring!");
+        return "basic/operation";
+    }
+
+    @GetMapping("/attribute")
+    public String attribute() {
+        return "basic/attribute";
+    }
+
+    @GetMapping("/each")
+    public String each(Model model) {
+        addUSer(model);
+        return "basic/each";
+
+    }
+    @GetMapping("/condition")
+    public String condition(Model model){
+        addUSer(model);
+        return "basic/condition";
+    }
+    private void addUSer(Model model){
+        List<User> list = new ArrayList<>();
+        list.add(new User("userA", 10));
+        list.add(new User("userB", 13));
+        list.add(new User("userC", 33));
+        model.addAttribute("users", list);
+
+    }
     @Component("helloBean")
     static class HelloBean {
         public String hello(String data){
             return "hello" + data;
         }
     }
+
+
 
     @Data
     static class User {
