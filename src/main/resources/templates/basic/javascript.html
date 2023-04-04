@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--이 방식은 자바스크립트가 깨진다!! 문자면 "[[${user.username}]]"으로 작성해야함! -->
+<!--그리고 객체는 toString 호출로 나와버림!! -->
+<script>
+  var username = [[${user.username}]];
+  var age = [[${user.age}]];
+
+
+  var username2 = /*[[${user.username}]]*/ "test username";
+  var user = [[${user}]];
+</script>
+
+<!--자동으로 문자 등의 타입이면 처리를 해줌!, JS에서 내추럴템플릿도 치환해줌! 즉 주석부분이 값으로 나오기 가능!-->
+<!--객체를 json으로 넣어준다!-->
+<script th:inline="javascript">
+  var username = [[${user.username}]];
+  var age = [[${user.age}]];
+  var username2 = /*[[${user.username}]]*/ "test username";
+  var user = [[${user}]];
+</script>
+<script th:inline="javascript">
+  [# th:each="user, stat: ${users}"]
+  var user[[${stat.count}]] = [[${user}]];
+  [/]
+</script>
+
+
+</body>
+</html>

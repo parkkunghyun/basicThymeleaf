@@ -95,6 +95,27 @@ public class BasicController {
         addUSer(model);
         return "basic/condition";
     }
+    @GetMapping("/block")
+    public String block(Model model){
+        addUSer(model);
+        return "basic/block";
+    }
+
+    @GetMapping("/javascript")
+    public String javascript(Model model){
+        model.addAttribute("user", new User("userA", 22));
+        addUSer(model);
+        return "basic/javascript";
+    }
+
+
+
+    @GetMapping("/comment")
+    public String comments(Model model) {
+        model.addAttribute("data","Spring!");
+        return "basic/comments";
+    }
+    @GetMapping
     private void addUSer(Model model){
         List<User> list = new ArrayList<>();
         list.add(new User("userA", 10));
@@ -103,6 +124,8 @@ public class BasicController {
         model.addAttribute("users", list);
 
     }
+
+
     @Component("helloBean")
     static class HelloBean {
         public String hello(String data){
